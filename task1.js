@@ -38,7 +38,7 @@ app.get('/api/getuser/:userid', (req, res) => {
 });
 
 //html file
-\
+
 
 
 app.get('/api/htmlpage', (req, res) => {

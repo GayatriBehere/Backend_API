@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const homeController = (req, res) => {
     const myResponse = {
         message: "Yes your are at home route",
@@ -25,4 +26,22 @@ export const signup = (req, res) => {
        message: "Signup successfully",
        success: true
     })
+}
+export const getGithubDetails = (req, res) => {
+    const {username} = req.params;
+
+    const API = `https://api.github.com/users/${username}`;
+
+    axios.get(API)
+    .then((response)=>{
+        res.json(response.data);
+    })
+    .catch((err)=>{
+        console.log("Error occured while fetching github details: ", err)
+
+        res.status(400).json({
+            message: "Error fetching github details",
+            success: false
+        });
+    })  
 }
