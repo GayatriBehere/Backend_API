@@ -9,6 +9,6 @@ router.get('/getuser/:userid', getUser);
 
 router.post('/signup', signup);
 
-router.get('/getdata/:username', getGithubDetails);
+
 
 export default router;
