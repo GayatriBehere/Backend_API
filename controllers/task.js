@@ -116,7 +116,7 @@ export const WeatherDetails = (req, res) => {
 // export const YouDetails = (req, res) => {
 //     const {keyword} = req.params;
 //     const arr=[];
-//     const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=AIzaSyCmWK-eNM-x91mgj0I9g9KNtulzixCi4LI`;
+//     const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=${process.env.API_KEY}`;
     
 //     axios.get(API)
 //     .then((response)=>{
@@ -137,7 +137,7 @@ export const WeatherDetails = (req, res) => {
 
         
 //     }
-//     const videoslist = { myvideos: arr }; // Creating the object myvideos and storing arr in it
+//     const videoslist = { myvideos: arr }; 
 //     res.json(videoslist);
        
         
@@ -173,8 +173,8 @@ export const YoutubeDetails = (req, res) => {
                 </div>
             `);
         }
-        const videosHTML = arr.join(''); // Joining the array elements to form a single HTML string
-        // Sending HTML response
+        const videosHTML = arr.join(''); 
+        
         res.send(`
             <!DOCTYPE html>
             <html lang="en">
