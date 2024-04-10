@@ -110,3 +110,91 @@ export const WeatherDetails = (req, res) => {
             });
         });
 }
+
+
+
+// export const YouDetails = (req, res) => {
+//     const {keyword} = req.params;
+//     const arr=[];
+//     const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=AIzaSyCmWK-eNM-x91mgj0I9g9KNtulzixCi4LI`;
+    
+//     axios.get(API)
+//     .then((response)=>{
+//     const {items}=response.data;
+//     for(let i=0;i<=2;i++){
+//        const { videoId } = items[i].id;
+    
+//     const { title, channelTitle } = items[i].snippet;
+//      const url = `https://www.youtube.com/watch?v=${videoId}`;
+   
+//         arr.push({
+            
+//             title, 
+//             channelTitle,
+//             url
+
+//         });
+
+        
+//     }
+//     const videoslist = { myvideos: arr }; // Creating the object myvideos and storing arr in it
+//     res.json(videoslist);
+       
+        
+//     })
+//     .catch((err)=>{
+//         console.log("Error occured while fetching CountryName: ", err)
+
+//         res.status(400).json({
+//             message: "Error fetching github details",
+//             success: false
+//         });
+//     })  
+// }
+
+
+
+export const YoutubeDetails = (req, res) => {
+    const { keyword } = req.params;
+    const arr = [];
+    const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=AIzaSyCmWK-eNM-x91mgj0I9g9KNtulzixCi4LI`;
+
+    axios.get(API)
+    .then((response) => {
+        const { items } = response.data;
+        for (let i = 0; i <= 2 && i < items.length; i++) {
+            const { videoId } = items[i].id;
+            const { title, channelTitle } = items[i].snippet;
+            const url = `https://www.youtube.com/watch?v=${videoId}`;
+            arr.push(`
+                <div>
+                    <h3>${title}</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            `);
+        }
+        const videosHTML = arr.join(''); // Joining the array elements to form a single HTML string
+        // Sending HTML response
+        res.send(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>YouTube Videos</title>
+            </head>
+            <body>
+                <h1>YouTube Videos</h1>
+                ${videosHTML} // Embedding the videos HTML
+            </body>
+            </html>
+        `);
+    })
+    .catch((err) => {
+        console.log("Error occurred while fetching YouTube details: ", err);
+        res.status(400).json({
+            message: "Error fetching YouTube details",
+            success: false
+        });
+    });
+}
