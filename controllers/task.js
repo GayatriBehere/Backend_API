@@ -157,7 +157,7 @@ export const WeatherDetails = (req, res) => {
 export const YoutubeDetails = (req, res) => {
     const { keyword } = req.params;
     const arr = [];
-    const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=AIzaSyCmWK-eNM-x91mgj0I9g9KNtulzixCi4LI`;
+    const API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&part=id&q=${keyword}&type=video&key=${process.env.API_KEY}`;
 
     axios.get(API)
     .then((response) => {

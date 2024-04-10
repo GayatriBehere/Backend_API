@@ -1,3 +1,5 @@
+import {  configDotenv } from 'dotenv';
+configDotenv();
 import express from 'express';
 import userRoutes from './routes/task.js';
 
